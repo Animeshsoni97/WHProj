@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css" />
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+<title>All Uoms</title>
+</head>
+<body>
+<div class="container">
+<h1 class="text-center bg-primary">This is ALL UMO's</h1>
+
+<br><marquee th:text="${id1}"></marquee><br>
+<table  class="table table-hover">
+
+<tr class="bg-info"> 
+<th >ID</th> 
+<th >UOM Type</th> 
+<th >UOM Model</th> 
+<th >UOM Description</th>
+<th colspan="2">Operation</th> 
+</tr>
+
+<tr th:each="e : ${uoms}">
+<td th:text="${e.uomId}"></td>
+<td th:text="${e.uomType}"></td>
+<td th:text="${e.uomModel}"></td>
+<td th:text="${e.uomDesc}"></td>
+<td > <a  th:href="@{/uom/delete?uomId={id}(id=${e.uomId})}">
+<button class="btn btn-outline-danger">DELETE </button> </a> 
+</td>
+<td > <a th:href="@{/uom/edit?uomId={id}(id=${e.uomId})}">
+<button class="btn btn-outline-primary">  EDIT</button> </a>
+</td>
+ </tr>
+</table>
+</div>
+</body>
+</html>

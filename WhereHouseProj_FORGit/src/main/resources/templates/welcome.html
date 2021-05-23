@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<title>welcome</title>
+</head>
+<body>
+
+<h1 > Modules : </h1>
+<br><marquee th:text="${id1}"></marquee><br>
+<a th:href="@{/uom/addUom}">add uom</a>
+<br>
+<br>
+<br>
+<a th:href="@{/uom/showUom}">show uom</a>
+<br>
+<br>
+<br>
+<a th:href="@{/orderMethod/add}">add ORDER METHOD</a>
+<br>
+<br>
+<br>
+<a th:href="@{/orderMethod/show}">show ORDER METHOD</a>
+
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css" />
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<title>Insert Uom</title>
+</head>
+<body>
+	<div class="container">
+		<h1 class="bg-info text-center">UOM INSERTION FORM</h1>
+		<form th:object="${uom}" method="POST" >
+			UOM Type:: <select th:field="*{uomType}" class="form-control">
+				<option value="-1">--select one--</option>
+				<option value="packing">PACKING</option>
+				<option value="nopacking">NO PACKING</option>
+			</select><br> 
+			UOM Model:: <input th:field="*{uomModel}"
+				class="form-control"><br> 
+				UOM Description:: <input
+				th:field="*{uomDesc}" class="form-control"><br> <input
+				class=" btn btn-outline-success form-control" type="submit"
+				value="Register">
+		</form>
+	</div>
+</body>
+</html>

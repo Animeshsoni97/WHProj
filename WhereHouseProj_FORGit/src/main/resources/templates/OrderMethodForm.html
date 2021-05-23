@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css" />
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<title>Insert Order mthod</title>
+</head>
+<body>
+	<div class="container">
+		<h1 class="bg-info text-center">ORDER METHOD INSERTION FORM</h1>
+		<br>
+		<form th:object="${orderMethod}" method="POST" >
+			
+			<div class="row">
+                <div class="col-sm-3 ">OrderMethod Id ::  
+                 </div>
+                <div class="col-sm-6 "> <input th:field="*{orderMId}"  readonly="readonly"  class="form-control"> 
+                 </div>
+                <div class="col-sm-3 "> 
+                </div>
+           </div>
+           <br>
+			<div class="row">
+                <div class="col-sm-3 ">  Order Mode: 
+                 </div>
+                <div class="col-sm-6 text-center "> 
+			   Sale &nbsp; <input type="radio" value="sale" th:field="*{orderMMode}"> 
+			   Purchase &nbsp; <input type="radio" value="purchase" th:field="*{orderMMode}">
+                 </div>
+                <div class="col-sm-3 "> 
+                </div>
+           </div>
+			<br>
+			<div class="row">
+                <div class="col-sm-3 "> OrderMethod Coad::
+                 </div>
+                <div class="col-sm-6 "> <input th:field="*{orderMCode}" class="form-control">  
+                 </div>
+                <div class="col-sm-3 "> 
+                </div>
+           </div>
+           <br>
+			<div class="row">
+                <div class="col-sm-3 "> OrderMethod Type::
+                 </div>
+                <div class="col-sm-6 ">
+                 <select th:field="*{orderMType}" class="form-control">
+				<option value="-1">--select one--</option>
+				<option value="FIFO">FIFO</option>
+				<option value="LIFO">LIFO</option>
+				<option value="FCFO">FCFO</option>
+				<option value="FEFO">FEFO</option>
+			    </select> 
+                 </div>
+                <div class="col-sm-3 "> 
+                </div>
+           </div>
+           <br>
+			<div class="row">
+                <div class="col-sm-3 "> OrderMethod Accept:: 
+                 </div>
+                <div class="col-sm-6 ">  
+                <input type="checkbox" th:field="*{orderMAccept}" value="MULTI-MODEL"> MULTI-MODEL<br>
+                <input type="checkbox" th:field="*{orderMAccept}" value="ACCEPT RETURN"> ACCEPT RETURN
+                 </div>
+                <div class="col-sm-3 "> 
+                </div>
+           </div>
+			<br>
+			
+			<div class="row">
+                <div class="col-sm-3 "> Order Method Description:: 
+                 </div>
+                <div class="col-sm-6 ">  
+                <textarea rows="4" cols="5" th:field="*{orderMDesc}" class="form-control"></textarea> 
+                 </div>
+                <div class="col-sm-3 "> 
+                </div>
+           </div>
+           <br><br>
+			<div class="row">
+                <div class="col-sm-3 ">
+                 </div>
+                <div class="col-sm-6 ">  
+                <input class=" btn btn-outline-success form-control" type="submit" value="CREATE ORDER METHOD"> 
+                </div>
+                <div class="col-sm-3 "> 
+                </div>
+           </div>
+			<br>
+		</form>
+	</div>
+</body>
+</html>
