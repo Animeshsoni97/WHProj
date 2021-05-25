@@ -3,21 +3,21 @@
 <head>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css" />
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <title>Insert Order mthod</title>
 </head>
 <body>
 	<div class="container">
 		<h1 class="bg-info text-center">ORDER METHOD INSERTION FORM</h1>
 		<br>
-		<form th:object="${orderMethod}" method="POST" >
+		<form th:object="${orderMethod}" method="POST" id="myfrm" >
 			
 			<div class="row">
                 <div class="col-sm-3 ">OrderMethod Id ::  
                  </div>
                 <div class="col-sm-6 "> <input th:field="*{orderMId}"  readonly="readonly"  class="form-control"> 
                  </div>
-                <div class="col-sm-3 "> 
+                <div class="col-sm-3 ">
                 </div>
            </div>
            <br>
@@ -25,19 +25,19 @@
                 <div class="col-sm-3 ">  Order Mode: 
                  </div>
                 <div class="col-sm-6 text-center "> 
-			   Sale &nbsp; <input type="radio" value="sale" th:field="*{orderMMode}"> 
-			   Purchase &nbsp; <input type="radio" value="purchase" th:field="*{orderMMode}">
+	      Sale &nbsp;      <input type="radio" class="orderMMode" value="sale" th:field="*{orderMMode}"> 
+	      Purchase &nbsp; <input type="radio" class="orderMMode" value="purchase" th:field="*{orderMMode}">
                  </div>
-                <div class="col-sm-3 "> 
+                <div class="col-sm-3 "> <span id="orderMModeErr" style="color:red;text-align:center;"></span>
                 </div>
            </div>
 			<br>
 			<div class="row">
                 <div class="col-sm-3 "> OrderMethod Coad::
                  </div>
-                <div class="col-sm-6 "> <input th:field="*{orderMCode}" class="form-control">  
+                <div class="col-sm-6 "> <input th:field="*{orderMCode}" class="form-control" id="orderMCode">  
                  </div>
-                <div class="col-sm-3 "> 
+                <div class="col-sm-3 "> <span id="orderMCodeErr" style="color:red;text-align:center;"></span>
                 </div>
            </div>
            <br>
@@ -45,15 +45,15 @@
                 <div class="col-sm-3 "> OrderMethod Type::
                  </div>
                 <div class="col-sm-6 ">
-                 <select th:field="*{orderMType}" class="form-control">
-				<option value="-1">--select one--</option>
+                 <select th:field="*{orderMType}" class="form-control required" id="orderMType">
+				<option value="">--select one--</option>
 				<option value="FIFO">FIFO</option>
 				<option value="LIFO">LIFO</option>
 				<option value="FCFO">FCFO</option>
 				<option value="FEFO">FEFO</option>
 			    </select> 
                  </div>
-                <div class="col-sm-3 "> 
+                <div class="col-sm-3 "> <span id="orderMTypeErr" style="color:red;text-align:center;"></span>
                 </div>
            </div>
            <br>
@@ -61,10 +61,10 @@
                 <div class="col-sm-3 "> OrderMethod Accept:: 
                  </div>
                 <div class="col-sm-6 ">  
-                <input type="checkbox" th:field="*{orderMAccept}" value="MULTI-MODEL"> MULTI-MODEL<br>
-                <input type="checkbox" th:field="*{orderMAccept}" value="ACCEPT RETURN"> ACCEPT RETURN
+                <input type="checkbox" th:field="*{orderMAccept}" class="orderMAccept" value="MULTI-MODEL"> MULTI-MODEL<br>
+                <input type="checkbox" th:field="*{orderMAccept}" class="orderMAccept" value="ACCEPT RETURN"> ACCEPT RETURN
                  </div>
-                <div class="col-sm-3 "> 
+                <div class="col-sm-3 "> <span id="orderMAcceptErr" style="color:red;text-align:center;"></span>
                 </div>
            </div>
 			<br>
@@ -73,9 +73,9 @@
                 <div class="col-sm-3 "> Order Method Description:: 
                  </div>
                 <div class="col-sm-6 ">  
-                <textarea rows="4" cols="5" th:field="*{orderMDesc}" class="form-control"></textarea> 
+                <textarea rows="4" cols="5" th:field="*{orderMDesc}" class="form-control" id="orderMDesc"></textarea> 
                  </div>
-                <div class="col-sm-3 "> 
+                <div class="col-sm-3 "> <span id="orderMDescErr" style="color:red;text-align:center;"></span>
                 </div>
            </div>
            <br><br>
@@ -92,4 +92,122 @@
 		</form>
 	</div>
 </body>
+<script type="text/javascript">
+$(document).ready(function(){
+
+	//1. create error var for checking that elemt contains error?
+	var orderMCodeError=true;//true->yes it has error
+	var orderMTypeError=true;
+	var orderMModeError=true;
+	var orderMAcceptError=true;
+	var orderMDescError=true;
+	
+	//2. call function on keydown
+	$("#orderMCode").keyup(function(){
+		validate_orderMCode();
+	});
+	$("#orderMType").click(function(){
+		validate_orderMType();
+	});
+    
+	$(".orderMMode").on("click",function(){
+	 validate_orderMMode();
+	  });
+	$(".orderMAccept").on("click",function(){
+	 validate_orderMAccept();
+	  });
+	$("#orderMDesc").keyup(function(){
+		validate_orderMDesc();
+	});
+	
+	
+	//3. create validation fn
+    function validate_orderMCode(){
+    	//3.1 hide error
+		$("#orderMCodeErr").hide();
+    	//validate
+    	var v=$("#orderMCode").val();
+		if(v==""){
+			orderMCodeError=true;
+			$("#orderMCodeErr").show().html("please enter some Method Code");
+		}
+		else{
+			orderMCodeError=false;
+		}
+	}//validate_orderMCode
+	
+	function validate_orderMType(){
+	$("#orderMTypeErr").hide();
+	
+	var v= $("#orderMType").val();
+	   if(v==""){
+		orderMTypeError=true;
+		$("#orderMTypeErr").show().html("please select one option");
+	    }
+	else{
+		orderMTypeError=false;
+	   }
+	}//validate_orderMType
+	
+   function validate_orderMMode(){
+	$("#orderMModeErr").hide();
+	
+	var v =	$(".orderMMode:checked").length;
+	if(v==0){
+		orderMModeError=true;
+		$("#orderMModeErr").show().html("ORDER METHOD MODE IS MANDTORY");
+	}
+	else{
+		orderMModeError=false;
+	}
+	}//validate_orderMType
+	
+   function validate_orderMAccept(){
+	$("#orderMAcceptErr").hide();
+	
+	var v =	$(".orderMAccept:checked").length;
+	if(v==0){
+		orderMAcceptError=true;
+		$("#orderMAcceptErr").show().html("ORDER M ACCEPT must be atleast 1");
+	}
+	else{
+		orderMAcceptError=false;
+	}
+	}//validate_orderMType
+	
+	function validate_orderMDesc(){
+	$("#orderMDescErr").hide();
+	
+	var v= $("#orderMDesc").val();
+	   if(v==""){
+		   orderMDescError=true;
+		$("#orderMDescErr").show().html("PLEASE ENTER A DESCRIPTION");
+	    }
+	else{
+		orderMDescError=false;
+	   }
+	}//validate_orderMType
+	
+	
+	//last submit
+	$("#myfrm").submit(function(){
+		//call all validation function
+		validate_orderMCode();
+		validate_orderMType();
+		validate_orderMMode();
+		validate_orderMAccept();
+		validate_orderMDesc();
+		//check all error variable
+		if((orderMCodeError==true) || (orderMTypeError==true) || (orderMModeError==true)
+	|| (orderMAcceptError==true)|| (orderMDescError==true)){
+			return false;
+		} 
+		else
+		{
+			return true;
+		}
+	});
+});
+
+</script>
 </html>
