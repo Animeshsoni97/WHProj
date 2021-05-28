@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css" />
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+<title> Shipment Types</title>
+</head>
+<body>
+<div class="container">
+<h1 class="text-center bg-primary">This is ALL Shipment Type's</h1>
+
+<br><h3><marquee th:text="${msg}"></marquee></h3><br>
+<table  class="table table-hover">
+
+<tr class="bg-info"> 
+<th >ID</th> 
+<th >Shipment Type MODE</th> 
+<th >Shipment Type CODE</th> 
+<th >Enable Shipment Type</th> 
+<th >Shipment Type GADE</th>
+<th >Shipment Type Description</th>
+<th colspan="2">Operation</th> 
+</tr>
+
+<tr th:each="e : ${ShipmentTypes}">
+<td th:text="${e.shipTId}"></td>
+<td th:text="${e.shipTMode}"></td>
+<td th:text="${e.shipTCode}"></td>
+<td th:text="${e.enableShipT}"></td>
+<td th:text="${e.shipTGrade}"></td>
+<td th:text="${e.shipTDesc}"></td>
+<td > <a  th:href="@{/shipType/delete?shipTId={id}(id=${e.shipTId})}">
+<button  class="btn btn-outline-danger delete">DELETE </button> </a> 
+</td>
+<td > <a th:href="@{/shipType/edit?shipTId={id}(id=${e.shipTId})}">
+<button class="btn btn-outline-primary">  EDIT</button> </a>
+</td>
+ </tr>
+</table>
+</div>
+</body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".delete").click(function(){
+		 return confirm("are you sure to delete ? ");
+	});
+});
+
+</script>
+</html>

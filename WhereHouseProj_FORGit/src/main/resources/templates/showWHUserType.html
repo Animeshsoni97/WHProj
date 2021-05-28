@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css" />
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+<title>All WH Users</title>
+</head>
+<body>
+<div class="container">
+<h1 class="text-center bg-primary">This is ALL WH User's</h1>
+
+<br><marquee th:text="${msg}"></marquee><br>
+<table  class="table table-hover">
+
+<tr class="bg-info"> 
+<th >ID</th> 
+<th >WH User Type</th> 
+<th >WH User Code</th> 
+<th >WH User For</th> 
+<th >WH User Email</th> 
+<th >WH User Contact</th> 
+<th >WH User ID Type</th> 
+<th >WH User ID Type Other</th> 
+<th >WH User ID Number</th> 
+<th colspan="2">Operation</th> 
+</tr>
+
+<tr th:each="e : ${wh_users}">
+<td th:text="${e.whUId}"></td>
+<td th:text="${e.whUType}"></td>
+<td th:text="${e.whUCode}"></td>
+<td th:text="${e.whUFor}"></td>
+<td th:text="${e.whUEmail}"></td>
+<td th:text="${e.whUContact}"></td>
+<td th:text="${e.whUIDType}"></td>
+<td th:text="${e.whUIDTypeOther}"></td>
+<td th:text="${e.whUIDNumber}"></td>
+
+<td > <a  th:href="@{/whUser/delete?whUserId={id}(id=${e.whUId})}">
+<button class="btn btn-outline-danger delete">DELETE </button> </a> 
+</td>
+<td > <a th:href="@{/whUser/edit?whUserId={id}(id=${e.whUId})}">
+<button class="btn btn-outline-primary">  EDIT</button> </a>
+</td>
+ </tr>
+</table>
+</div>
+</body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".delete").click(function(){
+		 return confirm("are you sure to delete ? ");
+	});
+});
+
+</script>
+</html>

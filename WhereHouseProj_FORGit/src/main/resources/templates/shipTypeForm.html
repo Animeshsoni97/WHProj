@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css" />
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<title>Insert Shipment Type</title>
+</head>
+<body>
+	<div class="container">
+		<h1 class="bg-info text-center">SHIPMENT TYPE INSERTION FORM</h1>
+		<br>
+		<form th:object="${shipmentType}" method="POST" id="myfrm" >
+			
+			<div class="row">
+                <div class="col-sm-3 ">Shipment Type  Id ::  
+                 </div>
+                <div class="col-sm-6 "> <input th:field="*{shipTId}"  readonly="readonly"  class="form-control"> 
+                 </div>
+                <div class="col-sm-3 ">
+                </div>
+           </div>
+           <br>
+			<div class="row">
+                <div class="col-sm-3 ">  Shipment Type Mode: 
+                 </div>
+                <div class="col-sm-6 text-center "> 
+	      <select th:field="*{shipTMode}" class="form-control required" >
+				<option value="">--select one--</option>
+				<option value="AIR">AIR</option>
+				<option value="TRUCK">TRUCK</option>
+				<option value="SHIP">SHIP</option>
+				<option value="TRAIN">TRAIN</option>
+			 </select> 
+                 </div>
+                <div class="col-sm-3 "> <span id="shipTModeErr"  style="color:red;text-align:center;"></span>
+                </div>
+           </div>
+			<br>
+			<div class="row">
+                <div class="col-sm-3 "> Shipment Type  Coad::
+                 </div>
+                <div class="col-sm-6 "> <input th:field="*{shipTCode}" class="form-control">  
+                 </div>
+                <div class="col-sm-3 "> <span id="shipTCodeErr" style="color:red;text-align:center;"></span>
+                </div>
+           </div>
+           <br>
+			<div class="row">
+                <div class="col-sm-3 ">Enable Shipment ::
+                 </div>
+                <div class="col-sm-6 ">
+                  <input type="radio" th:field="*{enableShipT}" value="Yes" class="enableShipT">Yes
+                  <input type="radio" th:field="*{enableShipT}" value="No" class="enableShipT">No
+                 </div>
+                <div class="col-sm-3 "> <span id="enableShipTErr" style="color:red;text-align:center;"></span>
+                </div>
+           </div>
+           <br>
+			<div class="row">
+                <div class="col-sm-3 "> Shipment Type  Grade:: 
+                 </div>
+                <div class="col-sm-6 ">  
+                <input type="radio" th:field="*{shipTGrade}" value="A" class="shipTGrade">A
+                <input type="radio" th:field="*{shipTGrade}" value="B" class="shipTGrade">B
+                <input type="radio" th:field="*{shipTGrade}" value="C" class="shipTGrade">C
+                 </div>
+                <div class="col-sm-3 "> <span id="shipTGradeErr" style="color:red;text-align:center;"></span>
+                </div>
+           </div>
+			<br>
+			
+			<div class="row">
+                <div class="col-sm-3 "> Shipment Type Description:: 
+                 </div>
+                <div class="col-sm-6 ">  
+                <textarea rows="4" cols="5" th:field="*{shipTDesc}" class="form-control" ></textarea> 
+                 </div>
+                <div class="col-sm-3 "> <span id="shipTDescErr"  style="color:red;text-align:center;"></span>
+                </div>
+           </div>
+           <br><br>
+			<div class="row">
+                <div class="col-sm-3 ">
+                 </div>
+                <div class="col-sm-6 ">  
+                <input class=" btn btn-outline-success form-control" type="submit" value="CREATE ORDER METHOD"> 
+                </div>
+                <div class="col-sm-3 "> 
+                </div>
+           </div>
+			<br>
+		</form>
+	</div>
+</body>
+<script lang="text/javascript">
+
+$(document).ready(function(){
+
+
+    //define err var
+    var shipTModeError=true;
+    var shipTCodeError=true;
+    var enableShipTError=true;
+    var shipTGradeError=true;
+
+    //create keyup function(event call)
+    $("#shipTMode").click(function(){
+        val_shipTMode();
+    });
+    $("#shipTCode").keyup(function(){
+        val_shipTCode();
+    });
+    $(".enableShipT").click(function(){
+        val_enableShipT();
+    });
+    $(".shipTGrade").click(function(){
+        val_shipTGrade();
+    });
+
+    //create the function
+ function val_shipTMode(){
+     $("#shipTModeErr").hide();
+      var v=$("#shipTMode").val();
+     if(v==""){
+        shipTModeError=true;
+        $("#shipTModeErr").show().html("please select one Shipment Mode");
+     }else{
+        shipTModeError=false;
+     }
+ }
+ function  val_shipTCode(){
+     $("#shipTCodeErr").hide();
+      var v=$("#shipTCode").val();
+     if(v==""){
+        shipTCodeError=true;
+        $("#shipTCodeErr").show().html("please enter Shipment Code");
+     }else{
+        shipTCodeError=false;
+     }
+ }
+
+ function  val_enableShipT(){
+     $("#enableShipTErr").hide();
+      var v=$(".enableShipT:checked").length;
+     if(v==0){
+        enableShipTError=true;
+        $("#enableShipTErr").show().html("please choose one enable Ship Type");
+     }else{
+        enableShipTError=false;
+     }
+ }
+ function  val_shipTGrade(){
+     $("#shipTGradeErr").hide();
+      var v=$(".shipTGrade:checked").length;
+     if(v==0){
+        shipTGradeError=true;
+        $("#shipTGradeErr").show().html("please choose one ship Type Grade");
+     }else{
+        shipTGradeError=false;
+     }
+ }
+
+//create on submit event
+$("#myfrm").submit(function(){
+//call all validate function
+val_shipTMode();
+val_shipTCode();
+val_enableShipT();
+val_shipTGrade();
+
+//if no error then submit
+if((shipTModeError==true) || (shipTCodeError==true)
+   (enableShipTError==true) || (shipTGradeError==true)){
+return false;
+}else{
+    return true;
+}
+
+    
+});
+
+});
+</script>
+</html>
