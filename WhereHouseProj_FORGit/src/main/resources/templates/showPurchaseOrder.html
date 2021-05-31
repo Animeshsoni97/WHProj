@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css" />
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
+<title> Purchase Order's</title>
+</head>
+<body>
+<div class="container">
+<h1 class="text-center bg-primary">This is ALL Purchase Order's</h1>
+
+<br><h3><marquee th:text="${msg}"></marquee></h3><br>
+<br>
+<table  class="table table-hover">
+<tr class="bg-info"> 
+<th >ID</th> 
+<th >PURCHASE ORDER CODE</th> 
+<th >SHIPMENT CODE</th> 
+<th >VENDOR </th>
+<th >PURCHASE ORDER REFERENCE NO</th>
+<th >PURCHASE ORDER QUALITY CHECK</th>
+<th >PURCHASE ORDER STATUS</th>
+<th >PURCHASE ORDER Description</th>
+<th >Operation</th> 
+</tr>
+
+<tr th:each="e : ${PurchaseOrders}">
+<td th:text="${e.poId}"></td>
+<td th:text="${e.poCode}"></td>
+<td th:text="${e.poShipCode.shipTCode}"></td>
+<td th:text="${e.poVendor.whUCode}"></td>
+<td th:text="${e.poRefNo}"></td>
+<td th:text="${e.poQltCheck}"></td>
+<td th:text="${e.poStatus}"></td>
+<td th:text="${e.poDesc}"></td>
+ 
+<td > <a th:href="@{/po/addPart?poId={id}(id=${e.poId})}">
+<button class="btn btn-outline-danger">  ADD PART</button> </a>
+</td>  
+ </tr>
+</table>
+</div>
+</body>
+</html>

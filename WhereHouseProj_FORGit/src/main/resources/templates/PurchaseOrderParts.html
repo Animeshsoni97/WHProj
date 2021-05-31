@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css" />
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<title>po parts's</title>
+</head>
+<body>
+	<div class="container">
+		<h1 class="text-center bg-primary">Select Parts for Your Purchase
+			Order</h1>
+
+		<br>
+		<h3>
+			<marquee th:text="${msg}"></marquee>
+		</h3>
+		<br> <br>
+		<table class="table table-bordered">
+			<tr>
+				<td>Order Code</td>
+				<td class="bg-secondary text-white"><b th:text="${po.poCode}"></b></td>
+				<td>Order Status</td>
+				<td class="bg-secondary text-white"><b th:text="${po.poStatus}"></b></td>
+			</tr>
+		</table>
+		<br> <br> <br>
+		<!--  -->
+		<form method="POST" th:object="${purchaseDetail}">
+			<input type="hidden" name="poId" th:value="${po.poId}">//poId=2
+			<div class="row">
+				<div class="col-sm-4 p-4 text-center">
+					<span class="h4 text-primary">Select Part:</span>&nbsp; <select
+						th:field="*{part.id}">
+						<option value="-1">--Select--</option>
+						<option th:each="p : ${parts}" th:text="${p.value}"
+							th:value="${p.key}">
+					</select>
+				</div>
+
+				<div class="col-sm-4 p-4 text-center">
+					<span class="h4 text-primary">Quantity:</span> &nbsp; <input
+						type="text" th:field="*{quantity}">
+				</div>
+				<div class="col-sm-4 p-4 text-center">
+					<input class=" btn btn-outline-danger" type="submit"
+						value="Add Part">
+				</div>
+			</div>
+		</form>
+
+
+
+		<table class="table table-hover">
+			<tr class="bg-info">
+				<th>Serial no</th>
+				<th>Item</th>
+				<th>Base Cost</th>
+				<th>Qty</th>
+				<th>Operation</th>
+			</tr>
+
+			<tr th:each="e : ${showPartsDetails}">
+				<td th:text="${e.slNo}"></td>
+				<td th:text="${e.part.partCode}"></td>
+				<td th:text="${e.part.partCost}"></td>
+				<td th:text="${e.quantity}"></td>
+				<td><a th:href="@{/po/delete?pDId={id}(id=${e.id})}">
+						<button id="delete" class="btn btn-outline-danger">REMOVE
+		 				</button>
+				</a></td> 
+			</tr>
+		</table>
+
+	</div> 
+</body>   
+
+</html>

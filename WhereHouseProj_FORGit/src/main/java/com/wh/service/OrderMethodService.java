@@ -1,12 +1,14 @@
 package com.wh.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wh.model.OrderMethod;
 import com.wh.repo.OrderMethodRepo;
+import com.wh.utills.MyColl;
 @Service
 public class OrderMethodService implements IOrderMethodService {
 	@Autowired
@@ -38,6 +40,12 @@ public class OrderMethodService implements IOrderMethodService {
 	
 	@Override
 	public Integer updateOrderMethod(OrderMethod u) {
-		return null;
+return	repo.save(u).getOrderMId();
 	}//update
+	
+	@Override
+	public Map<Integer, String> getIdAndCodeByPassingMode(String mode) {
+		List<Object[]> list=repo.showIDAndCodeByMode(mode);
+		 return MyColl.listToMap(list);
+	}
 }//class

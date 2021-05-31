@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css" />
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<title>Insert Purchase Order</title>
+</head>
+<body>
+	<div class="container">
+		<h1 class="bg-info text-center">PURCHASE ORDER INSERTION FORM</h1>
+		<br>
+		<form th:object="${purchaseOrder}" method="POST" id="myfrm" >
+			
+			<div class="row">
+                <div class="col-sm-3 ">PurchaseOrder Id ::  
+                 </div>
+                <div class="col-sm-6 "> <input th:field="*{poId}"  readonly="readonly"  class="form-control"> 
+                 </div>
+                <div class="col-sm-3 ">
+                </div>
+           </div>
+			<br>
+			<div class="row">
+                <div class="col-sm-3 "> PurchaseOrder Coad::
+                 </div>
+                <div class="col-sm-6 "> <input th:field="*{poCode}" class="form-control" id="orderMCode">  
+                 </div>
+                <div class="col-sm-3 "> <span id="poCodeErr" style="color:red;text-align:center;"></span>
+                </div>
+           </div>
+           <br>
+			<div class="row">
+                <div class="col-sm-3 "> Shipment Code::
+                 </div>
+                <div class="col-sm-6 ">
+                 <select th:field="*{poShipCode.shipTId}" class="form-control required" id="poShipCodeId">
+				<option value="-1">--select one--</option>
+				<option th:each="ob : ${shipEnable}"
+				         th:value="${ob.key}"
+				         th:text="${ob.value}"
+				         ></option>
+			    </select> 
+                 </div>
+                <div class="col-sm-3 "> <span id="poShipCodeIdErr" style="color:red;text-align:center;"></span>
+                </div>
+           </div>
+           <br>
+           <br>
+			<div class="row">
+                <div class="col-sm-3 "> Vendor::
+                 </div>
+                <div class="col-sm-6 ">
+                 <select th:field="*{poVendor.whUId}" class="form-control required" id="poVendorId">
+				<option value="-1">--select one--</option>
+				<option th:each="ob : ${whUserCode}"
+				         th:value="${ob.key}"
+				         th:text="${ob.value}"
+				         ></option>
+			    </select> 
+                 </div>
+                <div class="col-sm-3 "> <span id="poVendorIdErr" style="color:red;text-align:center;"></span>
+                </div>
+           </div>
+           <br>
+			<div class="row">
+                <div class="col-sm-3 "> Reference Number::  
+                 </div>
+                <div class="col-sm-6 ">  
+                <input th:field="*{poRefNo}" class="form-control" id="poRefNo"></input> 
+                 </div>
+                <div class="col-sm-3 "> <span id="poRefNoErr" style="color:red;text-align:center;"></span>
+                </div>
+           </div>
+			<div class="row">
+                <div class="col-sm-3 ">  Ouality Check: 
+                 </div>
+                <div class="col-sm-6 text-center "> 
+	      Required &nbsp;      <input type="radio" class="poQltCheck" value="required" th:field="*{poQltCheck}"> 
+	      Not-Required &nbsp; <input type="radio" class="poQltCheck" value="not required" th:field="*{poQltCheck}">
+                 </div>
+                <div class="col-sm-3 "> <span id="poQltCheckErr" style="color:red;text-align:center;"></span>
+                </div>
+           </div>
+           <br>
+			<div class="row">
+                <div class="col-sm-3 "> Order Status :: 
+                 </div>
+                <div class="col-sm-6 ">  
+                 <input type="text" th:field="*{poStatus}"  class="form-control" readonly="readonly" >
+                 </div>
+                <div class="col-sm-3 "> <span id="poStatusErr" style="color:red;text-align:center;"></span>
+                </div>
+           </div>   
+	      	<br>
+			
+			<div class="row">   
+                 <div class="col-sm-3 "> PURCHASE ORDER Description:: 
+                 </div>
+                <div class="col-sm-6 ">  
+                <textarea rows="4" cols="5" th:field="*{poDesc}" class="form-control" id="poDesc"></textarea> 
+                 </div>
+                <div class="col-sm-3 "> <span id="poDescErr" style="color:red;text-align:center;"></span>
+                </div>
+           </div> 
+           <br><br>
+			<div class="row">
+                <div class="col-sm-3 ">
+                 </div>  
+                <div class="col-sm-6 ">  
+                <input class=" btn btn-outline-success form-control" type="submit" value="CREATE PURCHASE ORDER"> 
+                </div>
+                <div class="col-sm-3 "> 
+                </div>
+           </div>
+			<br>
+		</form>
+	</div>
+</body>
+</html>

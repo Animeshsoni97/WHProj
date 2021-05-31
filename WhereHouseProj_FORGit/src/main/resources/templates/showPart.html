@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css" />
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+<title>All Parts</title>
+</head>
+<body>
+<div class="container">
+<h1 class="text-center bg-primary">This is ALL Parts's</h1>
+
+<br>
+<div class="bg-warning text-white text-center"
+th:if="${msg != null}">
+<marquee th:text="${msg}"></marquee>
+</div>
+<br>
+<table  class="table table-hover">
+
+<tr class="bg-info"> 
+<th >ID</th> 
+<th >Part Code</th> 
+<th >Part Diamentions</th> 
+<th >Part Cost</th> 
+<th >Part Cur
+<th >Part UOM</th> 
+<th >Part OrderMethod Sale</th> 
+<th >Part OrderMethod Purchase</th> 
+<th colspan="2" style="text-align: center;">Operation</th>
+</tr>
+
+<tr th:each="e : ${parts}">
+<td th:text="${e.id}"></td>
+<td th:text="${e.partCode}"></td>
+<td >
+<b th:text="${e.partLen}"></b>*
+<b th:text="${e.partWid}"></b>*
+<b th:text="${e.partHght}"></b>
+</td>
+<td th:text="${e.partCost}"></td>
+<td th:text="${e.partCurrency}"></td>
+<td th:text="${e.uom.uomModel}"></td>
+<td th:text="${e.om_sale.orderMCode}"></td>
+<td th:text="${e.om_purchase.orderMCode}"></td>
+
+<td > <a  th:href="@{/part/delete?partId={id}(id=${e.id})}">
+<button class="btn btn-outline-danger delete">DELETE </button> </a> 
+</td>
+<td > <a th:href="@{/part/edit?partId={id}(id=${e.id})}">
+<button class="btn btn-outline-primary">  EDIT</button> </a> 
+</td>
+ </tr>
+</table>
+</div>
+</body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".delete").click(function(){
+		 return confirm("are you sure to delete ? ");
+	});
+});
+
+</script>
+</html>

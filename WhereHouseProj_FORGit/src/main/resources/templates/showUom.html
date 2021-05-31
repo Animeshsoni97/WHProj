@@ -26,7 +26,7 @@
 <td th:text="${e.uomModel}"></td>
 <td th:text="${e.uomDesc}"></td>
 <td > <a  th:href="@{/uom/delete?uomId={id}(id=${e.uomId})}">
-<button class="btn btn-outline-danger">DELETE </button> </a> 
+<button class="btn btn-outline-danger delete">DELETE </button> </a> 
 </td>
 <td > <a th:href="@{/uom/edit?uomId={id}(id=${e.uomId})}">
 <button class="btn btn-outline-primary">  EDIT</button> </a>
@@ -35,4 +35,12 @@
 </table>
 </div>
 </body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".delete").click(function(){
+		 return confirm("are you sure to delete ? ");
+	});
+});
+
+</script>
 </html>

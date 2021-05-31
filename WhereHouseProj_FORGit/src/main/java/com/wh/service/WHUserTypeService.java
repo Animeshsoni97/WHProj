@@ -1,11 +1,14 @@
 package com.wh.service;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wh.model.WhUserType;
 import com.wh.repo.WHUserRepo;
+import com.wh.utills.MyColl;
 @Service
 public class WHUserTypeService implements IWHUserService {
 	@Autowired
@@ -45,6 +48,15 @@ public class WHUserTypeService implements IWHUserService {
 		return false;
 		else
 			return true;
+	}
+	/*
+	 * getUser Id and Code as List<Objecy[]> from repo
+	 * @param type(vendor/customer)
+	 * @return Map<Integer,String> containing all user type id and Code
+	 */
+	@Override
+	public Map<Integer, String> getwhUserIdAndCodeByType(String type) {
+		return 	MyColl.listToMap(repo.getIdAndCodeByType(type));
 	}
 	
 	

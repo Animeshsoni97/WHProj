@@ -2,16 +2,19 @@
 <html xmlns:th="https://www.thymeleaf.org/">
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css" />
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" ></script>
 <title> ORDER METHODs</title>
 </head>
 <body>
 <div class="container">
 <h1 class="text-center bg-primary">This is ALL ORDER METHOD's</h1>
 
-<br><marquee th:text="${id1}"></marquee><br>
+<br><h3><marquee th:text="${id1}"></marquee></h3><br>
+<br>
+<a th:href="@{/orderMethod/excelExport}"><button class="btn btn-primary">Excel Report</button></a>
+<a th:href="@{/orderMethod/pdfExport}"><button class="btn btn-warning">PDF Report</button></a>
+<br>
 <table  class="table table-hover">
-
 <tr class="bg-info"> 
 <th >ID</th> 
 <th >ORDER METHOD MODE</th> 
@@ -29,8 +32,9 @@
 <td th:text="${e.orderMType}"></td>
 <td th:text="${e.orderMAccept}"></td>
 <td th:text="${e.orderMDesc}"></td>
-<td > <a  th:href="@{/orderMethod/delete?orderMId={id}(id=${e.orderMId})}">
-<button class="btn btn-outline-danger">DELETE </button> </a> 
+<td >
+ <a  th:href="@{/orderMethod/delete?orderMId={id}(id=${e.orderMId})}">
+<button id="delete" class="btn btn-outline-danger delete">DELETE </button> </a> 
 </td>
 <td > <a th:href="@{/orderMethod/edit?orderMId={id}(id=${e.orderMId})}">
 <button class="btn btn-outline-primary">  EDIT</button> </a>
@@ -39,4 +43,12 @@
 </table>
 </div>
 </body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(".delete").click(function(){
+		 return confirm("are you sure to delete ? ");
+	});
+});
+
+</script>
 </html>

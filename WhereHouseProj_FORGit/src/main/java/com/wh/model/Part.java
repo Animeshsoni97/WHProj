@@ -4,11 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
-
+	
 @Data
 @Entity
 @Table(name="part_tab")
@@ -31,4 +33,17 @@ private Double partHght;
 private Double partCost;
 @Column(name="prt_curr_col")
 private String partCurrency;
+
+//
+@ManyToOne
+@JoinColumn(name = "uom_fk")
+private Uom uom;
+
+@ManyToOne
+@JoinColumn(name = "om_sale_fk")
+private OrderMethod om_sale;
+
+@ManyToOne
+@JoinColumn(name = "om_purchase_fk")
+private OrderMethod om_purchase;
 }

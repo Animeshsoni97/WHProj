@@ -1,26 +1,74 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org/">
-<head>
+<head><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.css" />
 <title>welcome</title>
 </head>
 <body>
 
-<h1 > Modules : </h1>
+<div class="container">
+<div class="jumbotron bg-info text-center p-4" style="margin-bottom:0">
+<h1 class=" text-white "> Modules : </h1>
+</div>
 <br><marquee th:text="${id1}"></marquee><br>
-<a th:href="@{/uom/addUom}">add uom</a>
-<br>
-<br>
-<br>
-<a th:href="@{/uom/showUom}">show uom</a>
-<br>
-<br>
-<br>
-<a th:href="@{/orderMethod/add}">add ORDER METHOD</a>
-<br>
-<br>
-<br>
-<a th:href="@{/orderMethod/show}">show ORDER METHOD</a>
 
-
+<div class="row">
+  <div class="col-sm-4">
+   
+    <div class="card">
+      <div class="card-body text-center ">
+      <a th:href="@{/uom/addUom}"><button class="btn btn-lg btn-outline-danger text-center"> ADD UOM'S</button></a>
+     <br><br> <a th:href="@{/uom/showUom}"><button class="btn btn-lg btn-outline-success text-center"> SHOW UOM'S </button></a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body text-center ">
+       <a th:href="@{/orderMethod/add}"><button class="btn btn-lg btn-outline-danger  text-center"> ADD ORDER METHOD </button></a>
+     <br><br>  <a th:href="@{/orderMethod/show}"><button class="btn btn-lg btn-outline-success text-center">SHOW ORDER METHOD</button></a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body text-center ">
+        <a th:href="@{/shipType/add}"><button class="btn btn-lg btn-outline-danger text-center">ADD Shipment Type</button></a>
+     <br><br>   <a th:href="@{/shipType/show}"><button class="btn btn-lg btn-outline-success text-center">SHOW Shipment Type</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body text-center ">
+       <a th:href="@{/whUser/add}"><button class="btn btn-lg btn-outline-danger  text-center"> ADD WH User Type </button></a>
+     <br><br>  <a th:href="@{/whUser/show}"><button class="btn btn-lg btn-outline-success text-center">SHOW WH User Type</button></a>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body text-center ">
+       <a th:href="@{/part/add}"><button class="btn btn-lg btn-outline-danger  text-center"> ADD Part  </button></a>
+     <br><br>  <a th:href="@{/part/show}"><button class="btn btn-lg btn-outline-success text-center">SHOW Part</button></a>
+      
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body text-center ">
+        <a th:href="@{/po/add}"><button class="btn btn-lg btn-outline-danger  text-center"> ADD PURCHASE ORDER </button></a>
+     <br><br>  <a th:href="@{/po/show}"><button class="btn btn-lg btn-outline-success text-center">SHOW PURCHASE ORDER</button></a>
+      
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="footer bg-info" style="position: fixed; bottom: 0; width: 100%;">
+  <h5 class="text-center ">Footer</h5>
+</div>
 </body>
 </html>

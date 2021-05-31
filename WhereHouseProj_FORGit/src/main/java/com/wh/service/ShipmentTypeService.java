@@ -1,12 +1,14 @@
 package com.wh.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wh.model.ShipmentType;
 import com.wh.repo.ShipmentTypeRepo;
+import com.wh.utills.MyColl;
 @Service
 public class ShipmentTypeService implements IShipmentTypeService{
 	@Autowired
@@ -35,6 +37,11 @@ public class ShipmentTypeService implements IShipmentTypeService{
 	public Integer updateShipmentType(ShipmentType u) {
 		return	repo.save(u).getShipTId();
 	}//update
-
-
+	
+	
+	@Override
+	public Map<Integer, String> getShipIdAndCodeForEnable() {
+	List<Object[]> ob=repo.getshipIdAndShipCodeByEnable("Yes");
+	return MyColl.listToMap(ob);	
+	}
 }//class
